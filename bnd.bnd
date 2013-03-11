@@ -1,0 +1,21 @@
+-runbundles: osgi.cmpn,\
+	org.apache.felix.scr,\
+	org.apache.felix.shell,\
+	org.apache.felix.shell.tui
+-runfw: org.apache.felix.framework
+-buildpath: osgi.core,\
+	osgi.cmpn,\
+	biz.aQute.bnd.annotation,\
+	junit.osgi,\
+	slf4j.api
+Bundle-Activator: ch.meyerdaniel.osgi.fss.BundleActivatorImpl
+Export-Package: ch.meyerdaniel.osgi.fss.filter,\
+	ch.meyerdaniel.osgi.fss.util,\
+	ch.meyerdaniel.osgi.fss.service,\
+	ch.meyerdaniel.osgi.fss.api
+Bundle-Version: 1.0.0
+Private-Package: ch.meyerdaniel.osgi.fss.service.intern,\
+	ch.meyerdaniel.osgi.fss
+-runee: JavaSE-1.7
+Bundle-Name: OSGi File System Services by Daniel Meyer
+Bundle-Vendor: Daniel Meyer
