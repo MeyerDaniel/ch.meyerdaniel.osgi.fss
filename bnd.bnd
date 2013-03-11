@@ -13,7 +13,7 @@ Export-Package: ch.meyerdaniel.osgi.fss.filter,\
 	ch.meyerdaniel.osgi.fss.util,\
 	ch.meyerdaniel.osgi.fss.service,\
 	ch.meyerdaniel.osgi.fss.api
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Private-Package: ch.meyerdaniel.osgi.fss.service.intern,\
 	ch.meyerdaniel.osgi.fss
 -runee: JavaSE-1.7
