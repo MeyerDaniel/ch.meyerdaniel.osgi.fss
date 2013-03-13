@@ -145,6 +145,8 @@ public class WatchServiceController {
 	}
 
 	private void processJavaPropertyFile(Path configFile, String servicePid) {
+		log.debug(MessageFormat.format("Process Java property file configuration with service pid: {0}.", servicePid));
+
 		final Properties prop;
 		try {
 			prop = fileService.readProperties(configFile);
@@ -200,6 +202,7 @@ public class WatchServiceController {
 
 	@SuppressWarnings("unchecked")
 	private void processXMLConfigurationFile(Path configFile, String servicePid) {
+		log.debug(MessageFormat.format("Process XML configuration with service pid: {0}.", servicePid));
 		if (/* Watcher Configuration */servicePid.startsWith("ch.meyerdaniel.osgi.fss")) {
 
 			try {
@@ -257,15 +260,15 @@ public class WatchServiceController {
 
 		} /* Configuration for managed services */else {
 
-			if (managedServices.containsKey(servicePid)) {
-				try {
-					Document doc = fileService.readXMLFile(configFile);
-					final Properties prop = new Properties();
-					prop.put("lastmodifiedtime", Files.getLastModifiedTime(configFile));
-					prop.put("xmlfile", doc);
+			try {
+				Document doc = fileService.readXMLFile(configFile);
+				final Properties prop = new Properties();
+				prop.put("lastmodifiedtime", Files.getLastModifiedTime(configFile));
+				prop.put("xmlfile", doc);
 
-					configurations.put(servicePid, prop);
+				configurations.put(servicePid, prop);
 
+				if (managedServices.containsKey(servicePid)) {
 					for (final ManagedService service : managedServices.get(servicePid)) {
 						executor.submit(new Runnable() {
 
@@ -279,14 +282,16 @@ public class WatchServiceController {
 							}
 						});
 					}
-				} catch (Exception e) {
-					log.error("", e);
 				}
+			} catch (Exception e) {
+				log.error("", e);
 			}
 		}
 	}
 
 	private void processBundle(Path child) {
+		log.debug(MessageFormat.format("Process bundle {0}.", child));
+
 		try (InputStream is = Channels.newInputStream(FileChannel.open(child, READ))) {
 			context.installBundle(child.getFileName().toString(), is).start();
 		} catch (IOException e) {
@@ -360,6 +365,7 @@ public class WatchServiceController {
 	}
 
 	private void registerManagedServiceAndNotify(final ManagedService service, final String servicePid) {
+		log.debug(MessageFormat.format("Register managed service with service pid: {0}.", servicePid));
 		Set<ManagedService> services = managedServices.get(servicePid);
 		if (services == null) {
 			services = Collections.newSetFromMap(new ConcurrentHashMap<ManagedService, Boolean>());
