@@ -380,6 +380,7 @@ public class WatchServiceController {
 				public void run() {
 					try {
 						service.updated(configurations.get(servicePid));
+						log.debug(MessageFormat.format("Updated service with pid {0} of class {1}.", servicePid, service.getClass().getName()));
 					} catch (ConfigurationException e) {
 						log.error("", e);
 					}
