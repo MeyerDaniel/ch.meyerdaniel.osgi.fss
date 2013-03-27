@@ -1,21 +1,24 @@
 -runbundles: osgi.cmpn,\
 	org.apache.felix.scr,\
-	org.apache.felix.shell,\
-	org.apache.felix.shell.tui
+	org.apache.felix.gogo.shell,\
+	org.apache.felix.gogo.command,\
+	org.apache.felix.gogo.runtime
+-runee: JavaSE-1.7
+Service-Component: *
 -runfw: org.apache.felix.framework
--buildpath: osgi.core,\
-	osgi.cmpn,\
+-buildpath: osgi.cmpn,\
 	biz.aQute.bnd.annotation,\
 	junit.osgi,\
-	slf4j.api
-Bundle-Activator: ch.meyerdaniel.osgi.fss.BundleActivatorImpl
-Export-Package: ch.meyerdaniel.osgi.fss.filter,\
-	ch.meyerdaniel.osgi.fss.util,\
+	slf4j.api,\
+	osgi.core;version=4.2.0
+-runrequires: osgi.identity;filter:='(osgi.identity=org.apache.felix.scr)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)'
+Export-Package: ch.meyerdaniel.osgi.fss,\
+	ch.meyerdaniel.osgi.fss.api,\
+	ch.meyerdaniel.osgi.fss.filter,\
 	ch.meyerdaniel.osgi.fss.service,\
-	ch.meyerdaniel.osgi.fss.api
-Bundle-Version: 1.0.2
-Private-Package: ch.meyerdaniel.osgi.fss.service.intern,\
-	ch.meyerdaniel.osgi.fss
--runee: JavaSE-1.7
-Bundle-Name: OSGi File System Services by Daniel Meyer
-Bundle-Vendor: Daniel Meyer
+	ch.meyerdaniel.osgi.fss.service.intern,\
+	ch.meyerdaniel.osgi.fss.util
+Bundle-Name: OSGi File System Services
+Bundle-Activator: ch.meyerdaniel.osgi.fss.BundleActivatorImpl
