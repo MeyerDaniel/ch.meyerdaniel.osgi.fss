@@ -4,7 +4,6 @@
 	org.apache.felix.gogo.command,\
 	org.apache.felix.gogo.runtime
 -runee: JavaSE-1.7
-Service-Component: *
 -runfw: org.apache.felix.framework
 -buildpath: osgi.cmpn,\
 	biz.aQute.bnd.annotation,\
@@ -21,4 +20,4 @@ Export-Package: ch.meyerdaniel.osgi.fss,\
 	ch.meyerdaniel.osgi.fss.service.intern,\
 	ch.meyerdaniel.osgi.fss.util
 Bundle-Name: OSGi File System Services
-Bundle-Activator: ch.meyerdaniel.osgi.fss.BundleActivatorImpl
+Bundle-ContactAddress: Meyer Daniel, Switzerland, meyerdaniel.ch@gmail.com
